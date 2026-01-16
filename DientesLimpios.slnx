@@ -1,8 +1,12 @@
 <Solution>
-  <Folder Name="/API/" />
+  <Folder Name="/API/">
+    <Project Path="DientesLimpios.API/DientesLimpios.API.csproj" Id="acb05ea0-9b32-4a12-9106-7b839b5bafb0" />
+  </Folder>
   <Folder Name="/Core/">
     <Project Path="DientesLimpios.Aplicacion/DientesLimpios.Aplicacion.csproj" />
     <Project Path="DientesLimpios.Dominio/DientesLimpios.Dominio.csproj" />
   </Folder>
-  <Folder Name="/Infraestructura/" />
+  <Folder Name="/Infraestructura/">
+    <Project Path="DientesLimpios.Persistencia/DientesLimpios.Persistencia.csproj" Id="eff571e4-8790-4fff-b8ea-3290c9e8ff3e" />
+  </Folder>
 </Solution>

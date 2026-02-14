@@ -8,10 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <PackageReference Include="Scrutor" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DientesLimpios.Dominio\DientesLimpios.Dominio.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CasosDeUso\Citas\Comandos\" />
+    <Folder Include="CasosDeUso\Citas\Consultas\" />
   </ItemGroup>
 
 </Project>

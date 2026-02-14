@@ -5,6 +5,10 @@ namespace DientesLimpios.Dominio.ObjetosDeValor;
 
 public record IntervaloDeTiempo
 {
+    private IntervaloDeTiempo()
+    {
+        
+    }
     public DateTime Inicio { get; }
     public DateTime Fin { get; }
     public IntervaloDeTiempo(DateTime inicio, DateTime fin)

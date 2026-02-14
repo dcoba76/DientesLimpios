@@ -1,7 +1,6 @@
 ﻿using DientesLimpios.Dominio.Enums;
 using DientesLimpios.Dominio.Excepciones;
 using DientesLimpios.Dominio.ObjetosDeValor;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DientesLimpios.Dominio.Entidades;
 
@@ -12,7 +11,7 @@ public class Cita
     public Guid DentistaId { get; private set; }
     public Guid ConsultorioId { get; private set; }
     public EstadoCita Estado { get; private set; }
-    public IntervaloDeTiempo IntervaloDeTiempo { get; private set; }
+    public IntervaloDeTiempo IntervaloDeTiempo { get; private set; } = null!;
     public Paciente? Paciente { get; private set; }
     public Dentista? Dentista { get; private set; }
     public Consultorio? Consultorio { get; private set; }
@@ -32,6 +31,10 @@ public class Cita
         Estado = EstadoCita.Programada;
         IntervaloDeTiempo = intervaloDeTiempo;
         Id = Guid.CreateVersion7();
+    }
+    private Cita()
+    {
+        
     }
 
     public void Cancelar()

@@ -5,19 +5,48 @@ namespace DientesLimpios.Dominio.Entidades;
 
 public class Dentista
 {
+    private Dentista()
+    {
+
+    }
     public Guid Id { get; private set; }
     public string Nombre { get; private set; } = null!;
     public Email Email { get; private set; } = null!;
 
     public Dentista(string nombre, Email email)
     {
-        if (string.IsNullOrWhiteSpace(nombre))
-        {
-            throw new ExcepcionDeReglaDeNegocio($"El {nameof(nombre)} es obligatorio.");
-        }
-       
+        AplicarReglasDeNegocioNombre(nombre);
+        AplicarReglasDeNegocioEmail(email);
+
         Id = Guid.CreateVersion7();
         Nombre = nombre;
         Email = email;
+    }
+    public void ActualizarNombre(string nombre)
+    {
+        AplicarReglasDeNegocioNombre(nombre);
+        Nombre = nombre;
+    }
+
+    public void ActualizarEmail(Email email)
+    {
+        AplicarReglasDeNegocioEmail(email);
+        Email = email;
+    }
+
+    private void AplicarReglasDeNegocioNombre(string nombre)
+    {
+        if (string.IsNullOrWhiteSpace(nombre))
+        {
+            throw new ExcepcionDeReglaDeNegocio("El nombre del dentista no puede estar vacío.");
+        }
+    }
+
+    private void AplicarReglasDeNegocioEmail(Email email)
+    {
+        if (string.IsNullOrWhiteSpace(email.Valor))
+        {
+            throw new ExcepcionDeReglaDeNegocio("El email del dentista no puede estar vacío.");
+        }
     }
 }

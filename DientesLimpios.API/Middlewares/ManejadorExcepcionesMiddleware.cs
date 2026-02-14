@@ -20,7 +20,7 @@ public class ManejadorExcepcionesMiddleware
         }
         catch (Exception ex)
         {
-
+            ManejarExcepcion(context, ex);
         }
     }
 
@@ -40,8 +40,6 @@ public class ManejadorExcepcionesMiddleware
                 var errores = excepcionDeValidacion.ErroresDeValidacion;
                 resultado = System.Text.Json.JsonSerializer.Serialize(excepcionDeValidacion.ErroresDeValidacion);
                 break;
-            default:
-                break;
         }
 
         context.Response.StatusCode = (int)httpStatusCode;
@@ -53,7 +51,7 @@ public class ManejadorExcepcionesMiddleware
 
 public static class ManejadorExcepcionesMiddlewareExtensions
 {
-    public static IApplicationBuilder UseManejadorExcepcionesMiddleware(this IApplicationBuilder builder)
+    public static IApplicationBuilder UseManejadorExcepciones(this IApplicationBuilder builder)
     {
         return builder.UseMiddleware<ManejadorExcepcionesMiddleware>();
     }

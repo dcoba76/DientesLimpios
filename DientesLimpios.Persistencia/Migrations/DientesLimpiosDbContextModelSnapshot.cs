@@ -18,10 +18,64 @@ namespace DientesLimpios.Persistencia.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.12")
+                .HasAnnotation("ProductVersion", "9.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DientesLimpios.Dominio.Entidades.Cita", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ConsultorioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreadoPor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("DentistaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PacienteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UltimaFechaModificacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UltimaModificacionPor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ComplexProperty<Dictionary<string, object>>("IntervaloDeTiempo", "DientesLimpios.Dominio.Entidades.Cita.IntervaloDeTiempo#IntervaloDeTiempo", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<DateTime>("Fin")
+                                .HasColumnType("datetime2")
+                                .HasColumnName("Fin");
+
+                            b1.Property<DateTime>("Inicio")
+                                .HasColumnType("datetime2")
+                                .HasColumnName("Inicio");
+                        });
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConsultorioId");
+
+                    b.HasIndex("DentistaId");
+
+                    b.HasIndex("PacienteId");
+
+                    b.ToTable("Citas");
+                });
 
             modelBuilder.Entity("DientesLimpios.Dominio.Entidades.Consultorio", b =>
                 {
@@ -29,10 +83,22 @@ namespace DientesLimpios.Persistencia.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CreadoPor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
+
+                    b.Property<DateTime?>("UltimaFechaModificacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UltimaModificacionPor")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -45,10 +111,22 @@ namespace DientesLimpios.Persistencia.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CreadoPor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime?>("UltimaFechaModificacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UltimaModificacionPor")
+                        .HasColumnType("nvarchar(max)");
 
                     b.ComplexProperty<Dictionary<string, object>>("Email", "DientesLimpios.Dominio.Entidades.Dentista.Email#Email", b1 =>
                         {
@@ -72,10 +150,22 @@ namespace DientesLimpios.Persistencia.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CreadoPor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime?>("UltimaFechaModificacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UltimaModificacionPor")
+                        .HasColumnType("nvarchar(max)");
 
                     b.ComplexProperty<Dictionary<string, object>>("Email", "DientesLimpios.Dominio.Entidades.Paciente.Email#Email", b1 =>
                         {
@@ -91,6 +181,33 @@ namespace DientesLimpios.Persistencia.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pacientes");
+                });
+
+            modelBuilder.Entity("DientesLimpios.Dominio.Entidades.Cita", b =>
+                {
+                    b.HasOne("DientesLimpios.Dominio.Entidades.Consultorio", "Consultorio")
+                        .WithMany()
+                        .HasForeignKey("ConsultorioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DientesLimpios.Dominio.Entidades.Dentista", "Dentista")
+                        .WithMany()
+                        .HasForeignKey("DentistaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DientesLimpios.Dominio.Entidades.Paciente", "Paciente")
+                        .WithMany()
+                        .HasForeignKey("PacienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Consultorio");
+
+                    b.Navigation("Dentista");
+
+                    b.Navigation("Paciente");
                 });
 #pragma warning restore 612, 618
         }

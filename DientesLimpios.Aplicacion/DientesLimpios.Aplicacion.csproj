@@ -15,9 +15,4 @@
     <ProjectReference Include="..\DientesLimpios.Dominio\DientesLimpios.Dominio.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CasosDeUso\Citas\Comandos\" />
-    <Folder Include="CasosDeUso\Citas\Consultas\" />
-  </ItemGroup>
-
 </Project>

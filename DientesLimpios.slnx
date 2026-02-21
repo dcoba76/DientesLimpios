@@ -7,6 +7,8 @@
     <Project Path="DientesLimpios.Dominio/DientesLimpios.Dominio.csproj" />
   </Folder>
   <Folder Name="/Infraestructura/">
+    <Project Path="DientesLimpios.Identidad/DientesLimpios.Identidad.csproj" Id="c6a0f9e4-f014-4f7a-8a25-0c84bc3579b5" />
+    <Project Path="DientesLimpios.Infraestructura/DientesLimpios.Infraestructura.csproj" Id="c8a2fb22-eae0-4173-a92e-292de3a37c0c" />
     <Project Path="DientesLimpios.Persistencia/DientesLimpios.Persistencia.csproj" Id="eff571e4-8790-4fff-b8ea-3290c9e8ff3e" />
   </Folder>
 </Solution>

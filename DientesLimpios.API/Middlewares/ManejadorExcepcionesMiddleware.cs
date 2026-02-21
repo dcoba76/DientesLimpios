@@ -1,4 +1,5 @@
 ﻿using DientesLimpios.Aplicacion.Excepciones;
+using DientesLimpios.Dominio.Excepciones;
 using System.Net;
 
 namespace DientesLimpios.API.Middlewares;
@@ -20,7 +21,7 @@ public class ManejadorExcepcionesMiddleware
         }
         catch (Exception ex)
         {
-            ManejarExcepcion(context, ex);
+            await ManejarExcepcion(context, ex);
         }
     }
 
@@ -39,6 +40,10 @@ public class ManejadorExcepcionesMiddleware
                 httpStatusCode = HttpStatusCode.BadRequest;
                 var errores = excepcionDeValidacion.ErroresDeValidacion;
                 resultado = System.Text.Json.JsonSerializer.Serialize(excepcionDeValidacion.ErroresDeValidacion);
+                break;
+            case ExcepcionDeReglaDeNegocio:
+                httpStatusCode = HttpStatusCode.BadRequest;
+                resultado = System.Text.Json.JsonSerializer.Serialize(new { mensaje = exception.Message });
                 break;
         }
 

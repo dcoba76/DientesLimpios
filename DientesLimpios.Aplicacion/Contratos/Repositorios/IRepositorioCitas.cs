@@ -1,4 +1,4 @@
-using DientesLimpios.Aplicacion.Contratos.Repositorios.Modelos;
+using DientesLimpios.Aplicacion.CasosDeUso.Citas.Consultas.ObtenerListadoCitas;
 using DientesLimpios.Dominio.Entidades;
 
 namespace DientesLimpios.Aplicacion.Contratos.Repositorios;

@@ -1,7 +1,7 @@
+using DientesLimpios.Aplicacion.CasosDeUso.Citas.Consultas.ObtenerListadoCitas;
 using DientesLimpios.Aplicacion.Contratos.Repositorios;
-using DientesLimpios.Aplicacion.Contratos.Repositorios.Modelos;
 using DientesLimpios.Dominio.Entidades;
-using DientesLimpios.Dominio.ObjetosDeValor;
+using DientesLimpios.Persistencia.Utilidades;
 using Microsoft.EntityFrameworkCore;
 
 namespace DientesLimpios.Persistencia.Repositorios;
@@ -23,7 +23,7 @@ public class RepositorioCitas: Repositorio<Cita>, IRepositorioCitas
             fin > x.IntervaloDeTiempo.Inicio).AnyAsync();
     }
 
-    public async Task<IEnumerable<Cita>> ObtenerFiltrado(FiltroCitasDTO filtroCitasDTO)
+    public async Task<IEnumerable<Cita>> ObtenerFiltrado(FiltroCitasDTO filtro)
     {
         var queryable = _context.Citas
             .Include(x=> x.Paciente)
@@ -31,29 +31,30 @@ public class RepositorioCitas: Repositorio<Cita>, IRepositorioCitas
             .Include(x=> x.Consultorio)
             .AsQueryable();
 
-        if(filtroCitasDTO.ConsultorioId is not null)
+        if(filtro.ConsultorioId is not null)
         {
-            queryable = queryable.Where(x=> x.ConsultorioId == filtroCitasDTO.ConsultorioId);
+            queryable = queryable.Where(x=> x.ConsultorioId == filtro.ConsultorioId);
         }
 
-        if (filtroCitasDTO.PacienteId is not null)
+        if (filtro.PacienteId is not null)
         {
-            queryable = queryable.Where(x => x.PacienteId == filtroCitasDTO.PacienteId);
+            queryable = queryable.Where(x => x.PacienteId == filtro.PacienteId);
         }
 
-        if (filtroCitasDTO.DentistaId is not null)
+        if (filtro.DentistaId is not null)
         {
-            queryable = queryable.Where(x => x.DentistaId == filtroCitasDTO.DentistaId);
+            queryable = queryable.Where(x => x.DentistaId == filtro.DentistaId);
         }
 
-        if (filtroCitasDTO.EstadoCita is not null)
+        if (filtro.EstadoCita is not null)
         {
-            queryable = queryable.Where(x => x.Estado == filtroCitasDTO.EstadoCita);
+            queryable = queryable.Where(x => x.Estado == filtro.EstadoCita);
         }
 
-        return await queryable.Where(x => x.IntervaloDeTiempo.Inicio.Date >= filtroCitasDTO.Inicio.Date 
-        && x.IntervaloDeTiempo.Fin.Date <= filtroCitasDTO.Fin.Date)
+        return await queryable
+            .Where(x => x.IntervaloDeTiempo.Inicio.Date >= filtro.Inicio.Date && x.IntervaloDeTiempo.Fin.Date <= filtro.Fin.Date)
             .OrderBy(x => x.IntervaloDeTiempo.Inicio)
+            .Paginar(filtro.Pagina, filtro.RegistrosPorPagina)
             .ToListAsync();
 
     }

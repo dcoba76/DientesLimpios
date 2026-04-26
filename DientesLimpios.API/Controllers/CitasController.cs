@@ -12,6 +12,7 @@ namespace DientesLimpios.API.Controllers;
 
 [ApiController]
 [Route("api/citas")]
+
 public class CitasController: ControllerBase
 {
     private readonly IMediator _mediator;

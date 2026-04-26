@@ -1,4 +1,3 @@
-using DientesLimpios.Aplicacion.Contratos.Repositorios.Modelos;
 using DientesLimpios.Aplicacion.Utilidades.Mediador;
 
 namespace DientesLimpios.Aplicacion.CasosDeUso.Citas.Consultas.ObtenerListadoCitas;

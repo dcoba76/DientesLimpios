@@ -7,7 +7,7 @@ public class ValidadorComandoCrearConsultorio: AbstractValidator<ComandoCrearCon
     public ValidadorComandoCrearConsultorio()
     {
         RuleFor(x => x.Nombre)
-            .NotEmpty().WithMessage("El campo {PropertyNam} es obligatorio.")
+            .NotEmpty().WithMessage("El campo {PropertyName} es obligatorio.")
             .MaximumLength(150).WithMessage("El nombre del consultorio no puede exceder los 100 caracteres.");
     }
 }

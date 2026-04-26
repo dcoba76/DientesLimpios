@@ -1,6 +1,6 @@
-﻿using DientesLimpios.Aplicacion.Contratos.Notificaciones;
+﻿using DientesLimpios.Aplicacion.CasosDeUso.Citas.Consultas.ObtenerListadoCitas;
+using DientesLimpios.Aplicacion.Contratos.Notificaciones;
 using DientesLimpios.Aplicacion.Contratos.Repositorios;
-using DientesLimpios.Aplicacion.Contratos.Repositorios.Modelos;
 using DientesLimpios.Aplicacion.Utilidades.Mediador;
 
 namespace DientesLimpios.Aplicacion.CasosDeUso.Citas.Comandos.EnviarRecordatorioCita;

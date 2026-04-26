@@ -31,7 +31,9 @@ public class RepositorioPacientes: Repositorio<Paciente>, IRepositorioPacientes
 
 
 
-        return await queryable.OrderBy(x => x.Nombre)
-            .Paginar(filtro.Pagina, filtro.RegistrosPorPagina).ToListAsync();
+        return await queryable
+            .OrderBy(x => x.Nombre)
+            .Paginar(filtro.Pagina, filtro.RegistrosPorPagina)
+            .ToListAsync();
     }
 }
